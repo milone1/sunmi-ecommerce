@@ -13,7 +13,7 @@ const ButtonForProduct = ({ id }) => {
         <Button 
         onPress={() => deleteElement(id)}
         type="clear" 
-        icon={<Icon name="trash" size={20} color="blue" />}
+        icon={<Icon name="trash" size={20} color="red" />}
         />
       ) : (
         <Button 

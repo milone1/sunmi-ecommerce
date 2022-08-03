@@ -1,10 +1,10 @@
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import { View, Text, FlatList, StyleSheet, Button } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { CartContext } from "../CartContext";
 import ButtonPay from "./ButtonPay";
 
 const ListSale = () => {
-  const { items, getItemsCount, getTotalPrice } = useContext(CartContext);
+  const { items, getItemsCount, getTotalPrice, deleteElement } = useContext(CartContext);
 
   function Totals() {
     let [total, setTotal] = useState(0);
@@ -35,6 +35,9 @@ const ListSale = () => {
             </Text>
             <Text style={styles.productTotal}>S/{item.totalPrice}</Text>
           </Text>
+          <View>
+            <Button title="X" onPress={() => {deleteElement(item.id)}}/>
+          </View>
         </View>
       </>
     );
