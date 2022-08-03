@@ -3,15 +3,16 @@ import {Text, Image, View, StyleSheet, TouchableOpacity, Button} from "react-nat
 import { CartContext } from "../CartContext";
 import { getProduct } from "../services/ProductsService";
 import ButtonAdd from "./ButtonAdd";
+import ButtonForProduct from "./ButtonForProduct";
 
 export function Product({name, price, image, onPress, id }){
     return(
-        <TouchableOpacity style={styles.card} onPress={console.log("Action")}>
+        <TouchableOpacity style={styles.card}>
             <Image style={styles.image} source={image} />
             <View style={styles.infoContainer}>
                 <Text style={styles.name}>{name}</Text>
                 <Text style={styles.price}>$ {price}</Text>
-                <ButtonAdd id={id}/>
+                <ButtonForProduct id={id}/>
             </View>
         </TouchableOpacity>
     )

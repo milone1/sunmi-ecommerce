@@ -38,8 +38,14 @@ export function CartProvider(props){
         return items.reduce((sum, item) => (sum + item.totalPrice), 0)
     }
 
+    function deleteElement(id) {
+        const products = items.filter((bas) => bas.id !== id);
+        setItems(products);
+        getProduct();
+    }
+
     return(
-        <CartContext.Provider value={{items, getItemsCount, addItemToCart, getTotalPrice}}>
+        <CartContext.Provider value={{items, getItemsCount, addItemToCart, getTotalPrice, deleteElement}}>
             {props.children}
         </CartContext.Provider>
     )
