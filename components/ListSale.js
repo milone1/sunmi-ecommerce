@@ -1,10 +1,14 @@
-import { View, Text, FlatList, StyleSheet, Button } from "react-native";
+import { View, Text, FlatList, StyleSheet } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { CartContext } from "../CartContext";
 import ButtonPay from "./ButtonPay";
 
+import { Button } from "react-native-elements";
+import Icon from "react-native-vector-icons/FontAwesome";
+
 const ListSale = () => {
-  const { items, getItemsCount, getTotalPrice, deleteElement } = useContext(CartContext);
+  const { items, getItemsCount, getTotalPrice, deleteElement } =
+    useContext(CartContext);
 
   function Totals() {
     let [total, setTotal] = useState(0);
@@ -12,13 +16,13 @@ const ListSale = () => {
       setTotal(getTotalPrice());
     });
     return (
-      <>
+      <View style={styles.layout}>
         <View style={styles.cartLineTotal}>
           <Text style={[styles.lineLeft, styles.lineTotal]}>Total</Text>
           <Text style={styles.mainTotal}>$ {total}</Text>
         </View>
         <ButtonPay items={items} total={total} />
-      </>
+      </View>
     );
   }
 
@@ -36,7 +40,15 @@ const ListSale = () => {
             <Text style={styles.productTotal}>S/{item.totalPrice}</Text>
           </Text>
           <View>
-            <Button title="X" onPress={() => {deleteElement(item.id)}}/>
+            <Button
+              style={styles.buttonDelete}
+              onPress={() => {
+                deleteElement(item.id);
+              }}
+              color="red"
+              type="clear"
+              icon={<Icon name="trash" size={20} color="red" />}
+            />
           </View>
         </View>
       </>
@@ -45,6 +57,7 @@ const ListSale = () => {
 
   return (
     <>
+      <Text style={styles.comanda}>COMANDA</Text>
       <FlatList
         style={styles.itemsList}
         contentContainerStyle={styles.itemsListContainer}
@@ -64,6 +77,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "80%",
     paddingVertical: 10,
+    textAlign: 'center',
   },
   image: {
     width: "25%",
@@ -108,4 +122,14 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     marginHorizontal: 8,
   },
+  buttonDelete: {
+    textAlign: "right",
+  },
+  comanda: {
+    fontSize: 25,
+    textAlign: "center",
+  },
+  layout: {
+    display: 'flex',
+  }
 });

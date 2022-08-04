@@ -12,7 +12,7 @@ export function Product({name, price, image, onPress, id }){
             <View style={styles.infoContainer}>
                 <Text style={styles.name}>{name}</Text>
                 <Text style={styles.price}>$ {price}</Text>
-                <ButtonForProduct id={id}/>
+                <ButtonAdd id={id}/>
             </View>
         </TouchableOpacity>
     )

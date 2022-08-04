@@ -1,9 +1,20 @@
-import { View, Text, Button } from "react-native";
-import React from "react";
+import { View, Text, Button, Alert } from "react-native";
+import React, { useState } from "react";
 import SunmiPrinter from "@heasy/react-native-sunmi-printer";
+import AwesomeAlert from "react-native-awesome-alerts";
+
+
 
 const ButtonPay = ({ items, total }) => {
+  const [open, setOpen] = useState(false);
+
+  const handleChangeOpen = () => {
+    console.log(open);
+    setOpen(!open);
+  };
+
   const imprimir = () => {
+    handleChangeOpen();
     SunmiPrinter.printerInit();
     SunmiPrinter.printerText("-----------------\n");
     SunmiPrinter.printerText("ACURIO'S RESTAURANT");
@@ -37,13 +48,36 @@ const ButtonPay = ({ items, total }) => {
     SunmiPrinter.printerText("\n");
     SunmiPrinter.printerText("-----------------");
     SunmiPrinter.printerText("\n");
-    SunmiPrinter.printerText("ESTA ORDEN ES SOLO UNA PRESENTACION FUNCIONAL, NO UNA REAL TRANSACCION.");
+    SunmiPrinter.printerText(
+      "ESTA ORDEN ES SOLO UNA PRESENTACION FUNCIONAL, NO UNA REAL TRANSACCION."
+    );
     SunmiPrinter.printerText("\n");
     SunmiPrinter.printerText("-----------------");
     SunmiPrinter.printerText("\n");
     SunmiPrinter.cutPaper();
   };
-  return <Button onPress={() => imprimir()} title="pagar" />;
+  return (
+    <>
+      <Button onPress={() => imprimir()} title="pagar" />
+      <AwesomeAlert
+        show={open}
+        showProgress={true}
+        title="Compra realizada"
+        message="La compra fue realizada con exito"
+        closeOnTouchOutside={true}
+        closeOnHardwareBackPress={false}
+        showConfirmButton={true}
+        confirmText="Salir"
+        confirmButtonColor="#DD6B55"
+        onCancelPressed={() => {
+          handleChangeOpen();
+        }}
+        onConfirmPressed={() => {
+          handleChangeOpen();
+        }}
+      />
+    </>
+  );
 };
 
 export default ButtonPay;
